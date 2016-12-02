@@ -23,7 +23,7 @@ class SchemaListener
         $table->addColumn('localized_value', 'string');
         $table->addColumn('original_value', 'string');
         $table->setPrimaryKey(array('id'));
-        $table->addUniqueIndex(array('route', 'locale', 'attribute'));
+        $table->addUniqueIndex(array('route', 'locale', 'attribute', 'original_value'));
         $table->addIndex(array('localized_value')); // this is much more selective than the unique index
     }
 }

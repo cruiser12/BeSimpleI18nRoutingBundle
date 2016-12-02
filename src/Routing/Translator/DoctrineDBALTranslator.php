@@ -108,8 +108,8 @@ class DoctrineDBALTranslator implements AttributeTranslatorInterface
 
     public function addTranslation($route, $locale, $attribute, $localizedValue, $originalValue)
     {
-        $query = "SELECT id FROM routing_translations WHERE route = ? AND locale = ? AND attribute = ?";
-        $id = $this->connection->fetchColumn($query, array($route, $locale, $attribute));
+        $query = "SELECT id FROM routing_translations WHERE route = ? AND locale = ? AND attribute = ? AND original_value = ?";
+        $id = $this->connection->fetchColumn($query, array($route, $locale, $attribute, $originalValue));
 
         if ($id) {
             $this->connection->update('routing_translations', array(

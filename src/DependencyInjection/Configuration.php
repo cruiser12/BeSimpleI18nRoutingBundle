@@ -106,7 +106,7 @@ class Configuration implements ConfigurationInterface
                             ->children()
                                 ->enumNode('type')
                                     ->defaultValue('array')
-                                    ->values(array('memcache', 'apc', 'array', 'xcache'))
+                                    ->values(array('memcache', 'apc', 'array', 'xcache','redis'))
                                 ->end()
                                 ->scalarNode('host')->end()
                                 ->scalarNode('port')->end()

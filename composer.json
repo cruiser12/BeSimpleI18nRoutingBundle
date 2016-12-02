@@ -1,9 +1,9 @@
 {
-    "name": "besimple/i18n-routing-bundle",
+    "name": "cruiser12/i18n-routing-bundle",
     "type": "symfony-bundle",
     "description": "Full routing internationalized on your Symfony2 project ",
     "keywords": ["routing", "internationalisation", "Symfony2", "BeSimpleI18nRoutingBundle"],
-    "homepage": "https://github.com/BeSimple/BeSimpleI18nRoutingBundle",
+    "homepage": "https://github.com/cruiser12/BeSimpleI18nRoutingBundle",
     "license": "MIT",
     "authors": [
         {
@@ -21,6 +21,10 @@
         {
             "name": "BeSimple Community",
             "homepage": "https://github.com/BeSimple/BeSimpleI18nRoutingBundle/contributors"
+        },
+        {
+            "name": "Christian Hiller",
+            "email": "kingcriz@gmail.com"
         }
     ],
     "require": {

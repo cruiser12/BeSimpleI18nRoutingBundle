@@ -16,13 +16,13 @@ use Doctrine\DBAL\Schema\Schema;
 class DoctrineDBALTranslator implements AttributeTranslatorInterface
 {
     /**
-     * @var Doctrine\DBAL\Connection
+     * @var \Doctrine\DBAL\Connection
      */
     private $connection;
 
     /**
      *
-     * @var Doctrine\Common\Cache\Cache
+     * @var \Doctrine\Common\Cache\Cache
      */
     private $cache;
 

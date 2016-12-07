@@ -20,7 +20,7 @@ class BeSimpleI18nRoutingExtension extends Extension
      * @param ContainerBuilder $container A ContainerBuilder instance
      */
     public function load(array $configs, ContainerBuilder $container)
-    {
+    {   
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('routing.xml');
 
@@ -102,7 +102,7 @@ class BeSimpleI18nRoutingExtension extends Extension
      * @param ContainerBuilder $container
      */
     private function configureDbalCacheDefinition(array $cacheDriver, ContainerBuilder $container)
-    {
+    {   
         if ($cacheDriver['type'] === 'memcache') {
             if (!empty($cacheDriver['class'])) {
                 $container->setParameter('be_simple_i18n_routing.doctrine_dbal.cache.memcache.class', $cacheDriver['class']);
@@ -117,6 +117,24 @@ class BeSimpleI18nRoutingExtension extends Extension
                 $container->setParameter('be_simple_i18n_routing.doctrine_dbal.cache.memcache_port', $cacheDriver['port']);
             }
         }
+        if ($cacheDriver['type'] === 'redis') {
+            if (!empty($cacheDriver['class'])) {
+                $container->setParameter('be_simple_i18n_routing.doctrine_dbal.cache.redis.class', $cacheDriver['class']);
+            }
+            if (!empty($cacheDriver['instance_class'])) {
+                $container->setParameter('be_simple_i18n_routing.doctrine_dbal.cache.redis_instance.class', $cacheDriver['instance_class']);
+            }
+            if (!empty($cacheDriver['host'])) {
+                $container->setParameter('be_simple_i18n_routing.doctrine_dbal.cache.redis_host', $cacheDriver['host']);
+            }
+            if (!empty($cacheDriver['port'])) {
+                $container->setParameter('be_simple_i18n_routing.doctrine_dbal.cache.redis_port', $cacheDriver['port']);
+            }
+            if (!empty($cacheDriver['port'])) {
+                $container->setParameter('be_simple_i18n_routing.doctrine_dbal.cache.redis_database', $cacheDriver['database']);
+            }
+        }
+
 
         $container->setAlias('be_simple_i18n_routing.doctrine_dbal.cache', sprintf('be_simple_i18n_routing.doctrine_dbal.cache.%s', $cacheDriver['type']));
 

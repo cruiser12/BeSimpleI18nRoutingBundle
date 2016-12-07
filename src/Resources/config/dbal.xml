@@ -10,7 +10,11 @@
         <parameter key="be_simple_i18n_routing.doctrine_dbal.cache.array.class">Doctrine\Common\Cache\ArrayCache</parameter>
         <parameter key="be_simple_i18n_routing.doctrine_dbal.cache.xcache.class">Doctrine\Common\Cache\XcacheCache</parameter>
         <parameter key="be_simple_i18n_routing.doctrine_dbal.cache.apc.class">Doctrine\Common\Cache\ApcCache</parameter>
-        <parameter key="be_simple_i18n_routing.doctrine_dbal.cache.redis.class">Doctrine\Common\Cache\RedisCache</parameter>
+        <parameter key="be_simple_i18n_routing.doctrine_dbal.cache.redis.class">Snc\RedisBundle\Doctrine\Cache\RedisCache</parameter>
+        <parameter key="be_simple_i18n_routing.doctrine_dbal.cache.redis_instance.class">Redis</parameter>
+        <parameter key="be_simple_i18n_routing.doctrine_dbal.cache.redis_host">localhost</parameter>
+        <parameter key="be_simple_i18n_routing.doctrine_dbal.cache.redis_port">6379</parameter>
+        <parameter key="be_simple_i18n_routing.doctrine_dbal.cache.redis_database">1</parameter>
         <parameter key="be_simple_i18n_routing.doctrine_dbal.cache.memcache.class">Doctrine\Common\Cache\MemcacheCache</parameter>
         <parameter key="be_simple_i18n_routing.doctrine_dbal.cache.memcache_instance.class">Memcache</parameter>
         <parameter key="be_simple_i18n_routing.doctrine_dbal.cache.memcache_host">localhost</parameter>
@@ -34,8 +38,20 @@
         </service>
 
         <service id="be_simple_i18n_routing.doctrine_dbal.cache.redis" class="%be_simple_i18n_routing.doctrine_dbal.cache.redis.class%" public="false">
+            <call method="setRedis">
+                <argument type="service" id="be_simple_i18n_routing.doctrine_dbal.cache.redis_instance" />
+            </call>
             <call method="setNamespace">
                 <argument>%be_simple_i18n_routing.doctrine_dbal.cache.namespace%</argument>
+            </call>
+        </service>
+        <service id="be_simple_i18n_routing.doctrine_dbal.cache.redis_instance" class="%be_simple_i18n_routing.doctrine_dbal.cache.redis_instance.class%" public="false">
+            <call method="connect">
+                <argument>%be_simple_i18n_routing.doctrine_dbal.cache.redis_host%</argument>
+                <argument>%be_simple_i18n_routing.doctrine_dbal.cache.redis_port%</argument>
+            </call>
+            <call method="select">
+                <argument>%be_simple_i18n_routing.doctrine_dbal.cache.redis_database%</argument>
             </call>
         </service>
 

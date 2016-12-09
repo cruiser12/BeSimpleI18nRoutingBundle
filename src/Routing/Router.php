@@ -84,6 +84,7 @@ class Router implements RouterInterface
                         );
                     }
                 }
+
                 unset($parameters['translate']);
             }
 

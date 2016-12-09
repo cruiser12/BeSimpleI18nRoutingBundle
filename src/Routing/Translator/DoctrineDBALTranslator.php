@@ -128,14 +128,27 @@ class DoctrineDBALTranslator implements AttributeTranslatorInterface
 
         // prime the cache!
         if ($this->primeCache) {
+
+            //translation
             $hashKey  = $route . "__" . $locale . "__" . $attribute . "__" . $localizedValue;
             $cacheKey = "besimplei18nroute__" . sha1($hashKey);
             $translatedValues = $this->cache->fetch($cacheKey);
             if (!$translatedValues) {
                 $translatedValues = array();
             }
-            $translatedValues[$hashKey][$originalValue];
+            $translatedValues[$hashKey]=$originalValue;
             $this->cache->save($cacheKey, $translatedValues);
+
+            //translation
+            $hashKey  = $route . "__" . $locale . "__" . $attribute . "__" . $originalValue;
+            $cacheKey = "besimplei18nroute__reverse__" . sha1($hashKey);
+            $translatedValues = $this->cache->fetch($cacheKey);
+            if (!$translatedValues) {
+                $translatedValues = array();
+            }
+            $translatedValues[$hashKey]=$localizedValue;
+            $this->cache->save($cacheKey, $translatedValues);
+
         }
     }
 }

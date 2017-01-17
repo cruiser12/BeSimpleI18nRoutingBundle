@@ -51,10 +51,12 @@ class DoctrineDBALTranslator implements AttributeTranslatorInterface
      */
     public function translate($route, $locale, $attribute, $value)
     {
+        $route = "entity";
         // values can potentially be large, so we hash them and prevent collisions
         $hashKey          = $route . "__" . $locale . "__" . $attribute . "__" . $value;
         $cacheKey         = "besimplei18nroute__" . sha1($hashKey);
         $translatedValues = $this->cache->fetch($cacheKey);
+
         if ($translatedValues && isset($translatedValues[$hashKey])) {
             return $translatedValues[$hashKey];
         }
@@ -86,10 +88,13 @@ class DoctrineDBALTranslator implements AttributeTranslatorInterface
      */
     public function reverseTranslate($route, $locale, $attribute, $value)
     {
+
+        $route = "entity";
         // values can potentially be large, so we hash them and prevent collisions
         $hashKey  = $route . "__" . $locale . "__" . $attribute . "__" . $value;
         $cacheKey = "besimplei18nroute__reverse__" . sha1($hashKey);
         $reverseTranslatedValues = $this->cache->fetch($cacheKey);
+
         if ($reverseTranslatedValues && isset($reverseTranslatedValues[$hashKey])) {
             return $reverseTranslatedValues[$hashKey];
         }
@@ -108,6 +113,7 @@ class DoctrineDBALTranslator implements AttributeTranslatorInterface
 
     public function addTranslation($route, $locale, $attribute, $localizedValue, $originalValue)
     {
+        $route = "entity";
         $query = "SELECT id FROM routing_translations WHERE route = ? AND locale = ? AND attribute = ? AND original_value = ?";
         $id = $this->connection->fetchColumn($query, array($route, $locale, $attribute, $originalValue));
 
